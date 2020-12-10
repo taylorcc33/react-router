@@ -1,21 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { Container } from "semantic-ui-react";
+import {Route, Switch } from "react-router-dom"
+import Ian from "./pages/Ian/Ian";
 
 function App() {
   return (
     <>
       <Navbar />
       <Container>
-        {/* <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/nate" component={Nate} />
+        <Switch>
           <Route exact path="/ian" component={Ian} />
-          <Route exact path="/rachel" component={Rachel} />
-          <Route exact path="/taylor" component={Taylor} />
-          <Route component={NoMatch} />
-        </Switch> */}
+
+        </Switch>
       </Container>
     </>
   );
