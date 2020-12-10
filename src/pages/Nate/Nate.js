@@ -7,11 +7,31 @@
 // I need to make the page render first. Once I know the route is properly connected, I can start working on making a state to display a list of guitars
 
 
-const Nate = () => {
+import React from 'react';
+import { Header, } from "semantic-ui-react";
+import Guitar from "./Guitar";
 
-  return (
-  <div>hello</div>
-  )
+class Nate extends React.Component {
+  state = {
+    guitars: [
+      { id: 1, brand: "Gibson", model: "'59 Les Paul" },
+      { id: 2, brand: "Fender", model: "American Professional II Stratocaster" },
+      { id: 3, brand: "Ibanez", model: "JEM - Steve Vai Signature" },
+    ]
+  };
+
+  renderGuitars = () => {
+    return this.state.guitars.map( guitar => <Guitar key={guitar.id} {...guitar} />)
+  };
+  
+  render() {
+    return (
+      <div>
+        <Header as="h1">Guitar wishlist</Header>
+        { this.renderGuitars() }
+      </div>
+    )
+  }
 }
 
 export default Nate;
