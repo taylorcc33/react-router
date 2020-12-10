@@ -8,23 +8,32 @@ const Ian = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false);
 
-  useEffect(() => {
+  const getCategories = () => {
     Axios.get('https://api.chucknorris.io/jokes/categories')
     .then((res) => {
       setJokes(res.data);
       setLoading(false);
+
     })
     .catch((err) => {
       setLoading(false);
       setError(true);
     });
+  }
+
+  useEffect(() => {
+    getCategories()
 }, []);
+
 
 const renderCategories = () => {
   return jokes.map((j) => (
+    <>
     <Link to={`/Ian/${j}`}>
       <h1 key={j} category={j}>{j}</h1>
     </Link>
+    </>
+
   ))
 }
 
