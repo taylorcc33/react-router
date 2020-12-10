@@ -13,7 +13,6 @@ const Ian = () => {
     .then((res) => {
       setJokes(res.data);
       setLoading(false);
-      debugger;
     })
     .catch((err) => {
       setLoading(false);
@@ -23,7 +22,9 @@ const Ian = () => {
 
 const renderCategories = () => {
   return jokes.map((j) => (
-  <h1>{j}</h1>
+    <Link to={`/Ian/${j}`}>
+      <h1 key={j} category={j}>{j}</h1>
+    </Link>
   ))
 }
 
