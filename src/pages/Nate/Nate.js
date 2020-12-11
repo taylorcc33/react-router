@@ -10,6 +10,7 @@
 import React from 'react';
 import { Header, } from "semantic-ui-react";
 import Guitar from "./Guitar";
+import GuitarForm from "./GuitarForm";
 
 class Nate extends React.Component {
   state = {
@@ -20,14 +21,36 @@ class Nate extends React.Component {
     ]
   };
 
+  getId = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  };
+
+  addGuitar = (guitarData) => {
+    const { guitars, } = this.state;
+    const guitar = { id: this.getId(), ...guitarData, };
+    this.setState({ guitars: [guitar, ...guitars] });
+  }
+
+  editGuitar = (guitarData) => {
+    const guitars = this.state.guitars.map( guitar => {
+      if (guitar.id === guitarData.id )
+        return guitarData;
+      return guitar
+    });
+      this.setState({ guitars })
+  }
+
   renderGuitars = () => {
-    return this.state.guitars.map( guitar => <Guitar key={guitar.id} {...guitar} />)
+    return this.state.guitars.map( guitar => <Guitar key={guitar.id} {...guitar} edit={this.editGuitar} />)
   };
   
   render() {
     return (
       <div>
         <Header as="h1">Guitar wishlist</Header>
+        <p>Add a guitar to the list <GuitarForm add={this.addGuitar} /></p>
         { this.renderGuitars() }
       </div>
     )
