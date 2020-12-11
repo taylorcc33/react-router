@@ -1,57 +1,38 @@
-import Axios from "axios";
-import { useState, useEffect } from "react"; 
-import { Link } from "react-router-dom";
-import { Header } from "semantic-ui-react";
+import { useState  } from "react"; 
 
+//192215e8-ca19-44db-b06e-eed68526d6ea 
+const url = "https://api.thecatapi.com/v1/images/search";
+function Rachel(){
+  const [ catUrl, setCatUrl ] = useState('Testing');
 
-const Rachel =() => {
-  const [breeds, setbreeds] =useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false);
+const getCat = () => {
+  console.log('Well I made a cat app!');
 
+  fetch(url)
+  .then((res)=> res.json())
+  .then((cats)=> {
+    console.log('Cats: ', cats);
+    const catUrl = cats[0].url;
 
-const getBreeds = () =>{
-  Axios.get(`https://api.thecatapi.com/v1/images/search`)
-  .then((res) => {
-    setBreeds(res.data);
-    setLoading(false);
-
+    setCatUrl(catUrl); 
   })
+  .catch((error)=> {
+    console.log('Error: ', error);
+  });
 
-.catch((err) => {
-  setLoading(false);
-  setError(true);
-});
 }
 
-useEffect(()=> {
-  getBreeds()
-},[]);
+  console.log('Cat Url:', catUrl);
 
-const renderBreeds =() =>{
-return breeds.map((b) => (
-  <>
-  <link to={`/Rachel/${b}`}>
-  <h1 key= {b} breeds= {b}>{b}</h1>}
-  </link>
-</>
-  ))
-}
-if (loading) {
-  return (
+  return(
     <div>
-    <h1>loading</h1>
+      <h1>Look at this Cat!</h1>
+      <img src={catUrl} alt=""/>
+      <button onClick={getCat}>View another cat!</button>
     </div>
   );
 }
 
-return(
-  <>
-  <Header>Pick a Cat!!!</Header>
-  {renderBreeds()}
-  </>
-);
 
 
-
-export default Rachel
+export default Rachel;

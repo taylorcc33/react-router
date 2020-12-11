@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Container>
        <Switch>
-      <Route exact path="/rachel/:breed" component={Rachel} />
+      <Route exact path="/rachel" component={Rachel} />
          
         </Switch> 
       </Container>
@@ -19,4 +19,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
