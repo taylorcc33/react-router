@@ -9,7 +9,6 @@ import {
   Card,
   Icon,
 } from "semantic-ui-react";
-import { Route, Switch } from "react-router-dom";
 
 const Taylor = (props) => {
   const [users, setUsers] = useState([]);
@@ -28,6 +27,11 @@ const Taylor = (props) => {
       });
   }, []);
 
+  const deleteUser = (id) => {
+    console.log(id + " deleted");
+    setUsers(users.filter((user) => user.id !== id));
+  };
+
   const renderUsers = () => {
     return users.map((u) => (
       <Card key={u.id}>
@@ -44,6 +48,12 @@ const Taylor = (props) => {
           <a href={`/taylor/${u.id}`}>
             <Icon name="edit" />
             Edit Info
+          </a>
+        </Card.Content>
+        <Card.Content extra>
+          <a onClick={() => deleteUser(u.id)}>
+            <Icon name="trash" />
+            Delete
           </a>
         </Card.Content>
       </Card>
