@@ -12,7 +12,7 @@ class Guitar extends React.Component {
         <Segment inverted tertiary inverted color='blue' style={{ display:'flex', alignItems: 'center', justifyContent:'space-between'}}>
           {
             this.state.editing ?
-              <GuitarForm { ...this.props } />
+              <GuitarForm { ...this.props} toggleEdit={this.toggleEdit} />
             :
               <div>
                 <Header as="h3">{ this.props.model }</Header>
@@ -23,7 +23,7 @@ class Guitar extends React.Component {
               <Button icon color='grey' onClick={this.toggleEdit}>
                 <Icon name="pencil" />
               </Button>
-              <Button icon color='red'>
+              <Button icon color='red' onClick={this.toggleEdit}> {/* this.removeGuitar(id) */}
                 <Icon name='trash' />
               </Button>
             </div>

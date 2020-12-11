@@ -33,6 +33,14 @@ class Nate extends React.Component {
     this.setState({ guitars: [guitar, ...guitars] });
   }
 
+  // removeGuitar = (id) => {
+  //   const guitars = this.state.guitars.filter( guitar => {
+  //     if ( guitar.id !== id )
+  //       return guitar
+  //   });
+  //     this.setState({ guitars: [...guitars], });
+  // }
+
   editGuitar = (guitarData) => {
     const guitars = this.state.guitars.map( guitar => {
       if (guitar.id === guitarData.id )
@@ -43,7 +51,7 @@ class Nate extends React.Component {
   }
 
   renderGuitars = () => {
-    return this.state.guitars.map( guitar => <Guitar key={guitar.id} {...guitar} edit={this.editGuitar} />)
+    return this.state.guitars.map( guitar => <Guitar key={guitar.id} {...guitar} edit={this.editGuitar}  />) // remove={this.removeGuitar}
   };
   
   render() {
